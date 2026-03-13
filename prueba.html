@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍦 Helados.mix - Pedidos</title>
+
+    <meta property="og:title" content="🍦 Helados.mix - Pedidos Online">
+    <meta property="og:description" content="Elegí tus sabores favoritos y hacé tu pedido por WhatsApp en segundos.">
+    <meta property="og:image" content="https://heladosmix.github.io/index.html/logo.jpg?v=500">
+    <meta property="og:url" content="https://heladosmix.github.io/index.html">
+    <meta property="og:type" content="website">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primario: #ff85a2;
+            --secundario: #fce4ec;
+            --texto: #333333;
+            --whatsapp: #25d366;
+            --mp-azul: #009EE3;
+            --mp-azul-oscuro: #007EB5;
+            --mp-verde: #00A15E;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secundario);
+            color: var(--texto);
+            margin: 0;
+            padding-bottom: 160px;
+            font-size: 16px;
+        }
+
+        header {
+            background-color: var(--primario);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1.2;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            padding: 15px 10px;
+            width: 95%;
+            max-width: 550px;
+            margin: auto;
+        }
+
+        .categoria {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--primario);
+            font-size: 1.3rem;
+            margin: 0 0 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pote-img {
+            height: auto;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .radio-tamano {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #f0f0f0;
+            border-radius: 18px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .radio-tamano:hover {
+            background-color: #fff9fa;
+            border-color: var(--primario);
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            transform: scale(1.5);
+            accent-color: var(--primario);
+            margin-bottom: 10px;
+        }
+
+        .radio-tamano span {
+            font-size: 1.1rem;
+        }
+
+        .input-direccion {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #eee;
+            border-radius: 15px;
+            font-family: inherit;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .opcion {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 5px;
+            border-bottom: 1px solid #f2f2f2;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        input[type="checkbox"] {
+            margin: 0 15px 0 0;
+        }
+
+        .cuadro-alias {
+            display: inline-block;
+            background-color: var(--mp-azul);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            user-select: none;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 158, 227, 0.2);
+        }
+
+        .cuadro-alias:hover {
+            background-color: var(--mp-azul-oscuro);
+        }
+
+        #mensajeCopiado {
+            color: var(--mp-azul);
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .btn-flotante {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--whatsapp);
+            color: white;
+            padding: 20px;
+            border-radius: 35px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            width: 92%;
+            max-width: 480px;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .btn-promos-link {
+            display: inline-block;
+            background-color: #00bfff;
+            color: white !important;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,191,255,0.4);
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .contenedor-boton {
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <span class="brand-title">Helados.mix</span>
+        <p>Catálogo Interactivo</p>
+    </header>
+
+    <div class="container">
+        <form id="pedidoForm">
+            <div class="categoria">
+                <h2>📏 1. Elegí el tamaño</h2>
+                <div class="contenedor-boton">
+                    <a href="https://heladosmix.github.io/index.html/promos.html" class="btn-promos-link">
+                        ✨ ¡Ver Promos Imperdibles! 🍦
+                    </a>
+                </div>
+
+                <label class="radio-tamano">
+                    <img src="https://cdn-icons-png.flaticon.com/512/938/938063.png" alt="1 KG" class="pote-img" style="width: 100px;">
+                    <input type="radio" name="tamano" value="1 KG ($14.000)" onchange="actualizarInfo()">
+                    <span><strong>1 KG</strong> - $14.000</span>
+                </label>
+
+                <label class="radio-tamano">
+                    <img src="https://cdn-icons-png.flaticon.com/512/938/938063.png" alt="1/2 KG" class="pote-img" style="width: 85px;">
+                    <input type="radio" name="tamano" value="1/2 KG ($8.000)" onchange="actualizarInfo()">
+                    <span><strong>1/2 KG</strong> - $8.000</span>
+                </label>
+
+                <label class="radio-tamano">
+                    <img src="https://cdn-icons-png.flaticon.com/512/938/938063.png" alt="1/4 KG" class="pote-img" style="width: 70px;">
+                    <input type="radio" name="tamano" value="1/4 KG ($4.000)" onchange="actualizarInfo()">
+                    <span><strong>1/4 KG</strong> - $4.000</span>
+                </label>
+            </div>
+
+            <div class="categoria">
+                <h2>🏠 2. Dirección (Opcional)</h2>
+                <input type="text" id="direccion" class="input-direccion" placeholder="Calle y número (o retiro local)">
+            </div>
+
+            <div class="categoria">
+                <h2>🍨 3. Sabores a la Crema</h2>
+                <div id="lista-crema">Cargando sabores...</div>
+            </div>
+
+            <div class="categoria">
+                <h2>🍋 4. Sabores al Agua</h2>
+                <div id="lista-agua">Cargando sabores...</div>
+            </div>
+
+            <div class="categoria">
+                <h2>🤝 ALIAS MERCADO PAGO</h2>
+                <p style="margin-bottom: 10px; font-size: 0.95rem;">Toca el botón para copiar el alias:</p>
+                <div class="cuadro-alias" id="btnAlias" onclick="copiarAlias()">
+                    <span id="aliasText">helados.mix</span>
+                </div>
+                <div id="mensajeCopiado" style="visibility: hidden;">¡Copiado al portapapeles! ✅</div>
+            </div>
+
+            <button type="button" class="btn-flotante" onclick="enviarWhatsApp()">
+                <strong>ENVIAR POR WHATSAPP</strong><br>
+                <span id="resumen-seleccion" style="font-size: 0.9rem; font-weight: normal;">Primero elegí un tamaño</span>
+            </button>
+        </form>
+
+        <div style="text-align: center; background: white; padding: 20px; border-radius: 20px; margin: 20px auto; max-width: 300px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <p style="margin-bottom: 10px; font-weight: bold; color: #ff85a2;">🍦✨</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://heladosmix.github.io/index.html" alt="QR Helados Mix">
+            <p style="font-size: 0.8rem; margin-top: 5px; color: #888;">heladosmix.github.io</p>
+        </div>
+
+    </div>
+
+    
+</body>
+
+</html><script>
+    const urlPlanilla = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhxf_pDd_vZrsa7jDx-TtptUbTyuM6WyxnEPz9Kr9RLZht4k6Bym5Zcq6I-jGv6_3kHAm0-GQAB3jh/pub?output=csv';
+
+    async function cargarSabores() {
+        try {
+            // Agregamos un número aleatorio al final para evitar que Google use datos viejos
+            const respuesta = await fetch(urlPlanilla + '&version=' + Math.random());
+            const texto = await respuesta.text();
+            
+            const filas = texto.split(/\r?\n/);
+            const contCrema = document.getElementById('lista-crema');
+            const contAgua = document.getElementById('lista-agua');
+            
+            // Verificamos que los contenedores existan antes de limpiar
+            if (contCrema) contCrema.innerHTML = "";
+            if (contAgua) contAgua.innerHTML = "";
+
+            for (let i = 1; i < filas.length; i++) {
+                if (!filas[i].trim()) continue;
+
+                // Limpiamos comillas y espacios de cada columna
+                let columnas = filas[i].split(',').map(c => c.replace(/"/g, "").trim());
+                
+                if (columnas.length >= 3) {
+                    let nombre = columnas[0];
+                    let categoria = columnas[1]; 
+                    let disponible = columnas[2].toLowerCase();
+
+                    if (disponible === "si") {
+                        const htmlSabor = `<label class="opcion"><input type="checkbox" name="sabor" value="${nombre}" onchange="actualizarInfo()"> <span>${nombre}</span></label>`;
+                        
+                        // Comparación exacta con lo que tenés en el Excel
+                        if (categoria === "saboresCrema" && contCrema) {
+                            contCrema.innerHTML += htmlSabor;
+                        } else if (categoria === "saboresAgua" && contAgua) {
+                            contAgua.innerHTML += htmlSabor;
+                        }
+                    }
+                }
+            }
+
+            // Si no hay sabores, mostramos un mensaje de ayuda
+            if (contCrema && contCrema.innerHTML === "") contCrema.innerHTML = "<p>No hay sabores de crema activos.</p>";
+            if (contAgua && contAgua.innerHTML === "") contAgua.innerHTML = "<p>No hay sabores al agua activos.</p>";
+
+        } catch (error) {
+            console.error("Error:", error);
+            if(document.getElementById('lista-crema')) {
+                document.getElementById('lista-crema').innerHTML = "Error al conectar. Probá recargando la página.";
+            }
+        }
+    }
+
+    function actualizarInfo() {
+        const tamano = document.querySelector('input[name="tamano"]:checked');
+        const seleccionados = document.querySelectorAll('input[name="sabor"]:checked');
+        const resumen = document.getElementById('resumen-seleccion');
+        
+        if (!tamano) {
+            resumen.innerText = "Primero elegí un tamaño";
+            return;
+        }
+        
+        const n = seleccionados.length;
+        resumen.innerText = n === 0 ? "Seleccioná tus sabores" : `Llevás ${n} ${n === 1 ? 'sabor' : 'sabores'} seleccionados`;
+    }
+
+    function copiarAlias() {
+        const alias = "helados.mix";
+        navigator.clipboard.writeText(alias).then(() => {
+            const msj = document.getElementById("mensajeCopiado");
+            msj.style.visibility = "visible";
+            setTimeout(() => msj.style.visibility = "hidden", 2000);
+        });
+    }
+
+    function enviarWhatsApp() {
+        const tamano = document.querySelector('input[name="tamano"]:checked');
+        const seleccionados = document.querySelectorAll('input[name="sabor"]:checked');
+        const direccion = document.getElementById('direccion').value.trim() || "Retiro en local";
+
+        if (!tamano) {
+            alert("Por favor, elegí un tamaño.");
+            return;
+        }
+        if (seleccionados.length === 0) {
+            alert("Por favor, seleccioná al menos un sabor.");
+            return;
+        }
+
+        let lista = "";
+        seleccionados.forEach(s => lista += "✅ " + s.value + "%0A");
+
+        const msj = `¡Hola *Helados.mix*! 👋%0A%0A*Pedido:* ${tamano.value}%0A*Dirección:* ${direccion}%0A%0A*Sabores:*%0A${lista}`;
+        window.open(`https://wa.me/5491137610574?text=${msj}`, '_blank');
+    }
+
+    // Iniciamos la carga
+    window.onload = cargarSabores;
+</script>
