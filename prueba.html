@@ -1,396 +1,208 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍦 Helados.mix - Pedidos</title>
-
+     <title>🍦Promos Helados.mix</title>
+    
     <meta property="og:title" content="🍦 Helados.mix - Pedidos Online">
     <meta property="og:description" content="Elegí tus sabores favoritos y hacé tu pedido por WhatsApp en segundos.">
     <meta property="og:image" content="https://heladosmix.github.io/index.html/logo.jpg?v=500">
     <meta property="og:url" content="https://heladosmix.github.io/index.html">
     <meta property="og:type" content="website">
-<link rel="icon" href="https://heladosmix.github.io/index.html/logo.jpg" type="image/jpeg">
+    <link rel="icon" href="https://heladosmix.github.io/index.html/logo.jpg" type="image/jpeg">
 <link rel="apple-touch-icon" href="https://heladosmix.github.io/index.html/logo.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primario: #ff85a2;
-            --secundario: #fce4ec;
-            --texto: #333333;
-            --whatsapp: #25d366;
-            --mp-azul: #009EE3;
-            --mp-azul-oscuro: #007EB5;
-            --mp-verde: #00A15E;
+            --primario: #ff8fab;
+            --secundario: #fb6f92;
+            --fondo: #fff0f3;
+            --texto: #4a4a4a;
+            --celeste: #00bfff;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--secundario);
-            color: var(--texto);
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--fondo); 
+            text-align: center; 
+            padding: 20px; 
+            color: var(--texto); 
             margin: 0;
-            padding-bottom: 160px;
-            font-size: 16px;
         }
 
-        header {
-            background-color: var(--primario);
-            color: white;
-            text-align: center;
-            padding: 2.5rem 1rem;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .brand-title {
-            font-size: 2.4rem;
-            font-weight: 700;
-            display: block;
-            line-height: 1.2;
-        }
-
-        header p {
-            margin: 8px 0 0;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .container {
-            padding: 15px 10px;
-            width: 95%;
-            max-width: 550px;
-            margin: auto;
-        }
-
-        .categoria {
-            background: white;
-            border-radius: 20px;
-            padding: 25px 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-
-        h2 {
-            color: var(--primario);
-            font-size: 1.3rem;
-            margin: 0 0 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .pote-img {
-            height: auto;
-            margin-bottom: 10px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .radio-tamano {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 15px;
-            border: 2px solid #f0f0f0;
-            border-radius: 18px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .radio-tamano:hover {
-            background-color: #fff9fa;
-            border-color: var(--primario);
-        }
-
-        input[type="radio"],
-        input[type="checkbox"] {
-            transform: scale(1.5);
-            accent-color: var(--primario);
-            margin-bottom: 10px;
-        }
-
-        .radio-tamano span {
-            font-size: 1.1rem;
-        }
-
-        .input-direccion {
-            width: 100%;
-            padding: 16px;
-            border: 2px solid #eee;
-            border-radius: 15px;
-            font-family: inherit;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .opcion {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 5px;
-            border-bottom: 1px solid #f2f2f2;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1.1rem;
-        }
-
-        input[type="checkbox"] {
-            margin: 0 15px 0 0;
-        }
-
-        .cuadro-alias {
+        /* --- ESTILO BOTÓN VOLVER --- */
+        .btn-volver-celeste {
             display: inline-block;
-            background-color: var(--mp-azul);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.3rem;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-            user-select: none;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0, 158, 227, 0.2);
-        }
-
-        .cuadro-alias:hover {
-            background-color: var(--mp-azul-oscuro);
-        }
-
-        #mensajeCopiado {
-            color: var(--mp-azul);
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-top: 8px;
-        }
-
-        .btn-flotante {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--whatsapp);
-            color: white;
-            padding: 20px;
-            border-radius: 35px;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-            width: 92%;
-            max-width: 480px;
-            border: none;
-            cursor: pointer;
-            z-index: 1000;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .btn-promos-link {
-            display: inline-block;
-            background-color: #00bfff;
+            background-color: var(--celeste);
             color: white !important;
-            padding: 15px 30px;
+            padding: 15px 40px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.2rem;
-            margin: 25px 0;
+            margin: 30px 0;
             box-shadow: 0 4px 15px rgba(0,191,255,0.4);
             transition: 0.3s;
             border: none;
-            cursor: pointer;
+            text-align: center;
         }
 
-        .contenedor-boton {
-            text-align: center;
-            width: 100%;
+        .btn-volver-celeste:hover {
+            transform: scale(1.05);
+            background-color: #0099cc;
+        }
+
+        @media (max-width: 768px) {
+            body { padding-bottom: 110px !important; }
+            .btn-volver-celeste {
+                position: fixed; bottom: 20px; left: 50%;
+                transform: translateX(-50%); z-index: 9999;
+                margin: 0; width: 85%; max-width: 320px;
+            }
+        }
+
+        .contenedor-promos { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        
+        .card { 
+            background: white; border-radius: 20px; padding: 20px; width: 180px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 3px solid transparent; 
+            transition: 0.3s; cursor: pointer; position: relative;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--primario); }
+        .card.activa { border-color: var(--secundario); background: #fff5f7; }
+        
+        .precio { font-size: 1.3rem; font-weight: bold; color: #333; display: block; margin-top: 10px; }
+
+        #seccion-sabores { 
+            display: none; background: white; padding: 25px; border-radius: 25px; 
+            max-width: 600px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: left;
+        }
+
+        .categoria-titulo { font-weight: bold; color: var(--secundario); display: block; border-bottom: 2px solid var(--fondo); margin: 15px 0 10px; }
+        .lista-sabores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
+        label { display: flex; align-items: center; cursor: pointer; font-size: 0.9rem; padding: 5px; border-radius: 5px; }
+        input[type="checkbox"] { margin-right: 10px; width: 18px; height: 18px; accent-color: var(--secundario); }
+
+        .btn-ws { 
+            background-color: #25d366; color: white; padding: 18px; border: none;
+            border-radius: 50px; font-weight: bold; font-size: 1.2rem; cursor: pointer; 
+            margin-top: 25px; width: 100%; transition: 0.3s;
+        }
+        .btn-ws:hover { background-color: #1ebe57; }
+
+        @media (max-width: 600px) { 
+            .lista-sabores { grid-template-columns: 1fr; } 
+            .card { width: 140px; } 
         }
     </style>
 </head>
-
 <body>
+  <h1>🍦 Helados.mix 🍦</h1>
+    
+    <h2 style="color: #fb6f92; margin: 20px 0 5px 0; font-size: 2rem;">¡Promos!</h2>
+    
+    <span style="color: #00bfff; font-size: 1.6rem; font-weight: bold; display: block; margin-bottom: 30px; line-height: 1.2;">
+        Seleccioná tu combo y armalo como quieras
+    </span>
 
-    <header>
-        <span class="brand-title">Helados.mix</span>
-        <p>Catálogo Interactivo</p>
-    </header>
-
-    <div class="container">
-        <form id="pedidoForm">
-            <div class="categoria">
-                <h2>📏 1. Elegí el tamaño</h2>
-                <div class="contenedor-boton">
-                    <a href="https://heladosmix.github.io/index.html/promos.html" class="btn-promos-link">
-                        ✨ ¡Ver Promos Imperdibles! 🍦
-                    </a>
-                </div>
-
-                <label class="radio-tamano">
-                    <img src="https://cdn-icons-png.flaticon.com/512/938/938063.png" alt="1 KG" class="pote-img" style="width: 100px;">
-                    <input type="radio" name="tamano" value="1 KG ($14.000)" onchange="actualizarInfo()">
-                    <span><strong>1 KG</strong> - $14.000</span>
-                </label>
-
-                <label class="radio-tamano">
-                    <img src="https://cdn-icons-png.flaticon.com/512/938/938063.png" alt="1/2 KG" class="pote-img" style="width: 85px;">
-                    <input type="radio" name="tamano" value="1/2 KG ($8.000)" onchange="actualizarInfo()">
-                    <span><strong>1/2 KG</strong> - $8.000</span>
-                </label>
-
-                <label class="radio-tamano">
-                    <img src="https://cdn-icons-png.flaticon.com/512/938/938063.png" alt="1/4 KG" class="pote-img" style="width: 70px;">
-                    <input type="radio" name="tamano" value="1/4 KG ($4.000)" onchange="actualizarInfo()">
-                    <span><strong>1/4 KG</strong> - $4.000</span>
-                </label>
-            </div>
-
-            <div class="categoria">
-                <h2>🏠 2. Dirección (Opcional)</h2>
-                <input type="text" id="direccion" class="input-direccion" placeholder="Calle y número (o retiro local)">
-            </div>
-
-            <div class="categoria">
-                <h2>🍨 3. Sabores a la Crema</h2>
-                <div id="lista-crema">Cargando sabores...</div>
-            </div>
-
-            <div class="categoria">
-                <h2>🍋 4. Sabores al Agua</h2>
-                <div id="lista-agua">Cargando sabores...</div>
-            </div>
-
-            <div class="categoria">
-                <h2>🤝 ALIAS MERCADO PAGO</h2>
-                <p style="margin-bottom: 10px; font-size: 0.95rem;">Toca el botón para copiar el alias:</p>
-                <div class="cuadro-alias" id="btnAlias" onclick="copiarAlias()">
-                    <span id="aliasText">helados.mix</span>
-                </div>
-                <div id="mensajeCopiado" style="visibility: hidden;">¡Copiado al portapapeles! ✅</div>
-            </div>
-
-            <button type="button" class="btn-flotante" onclick="enviarWhatsApp()">
-                <strong>ENVIAR POR WHATSAPP</strong><br>
-                <span id="resumen-seleccion" style="font-size: 0.9rem; font-weight: normal;">Primero elegí un tamaño</span>
-            </button>
-        </form>
-
-        <div style="text-align: center; background: white; padding: 20px; border-radius: 20px; margin: 20px auto; max-width: 300px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <p style="margin-bottom: 10px; font-weight: bold; color: #ff85a2;">🍦✨</p>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://heladosmix.github.io/index.html" alt="QR Helados Mix">
-            <p style="font-size: 0.8rem; margin-top: 5px; color: #888;">heladosmix.github.io</p>
+    <div class="contenedor-promos">
+        <div class="card" id="c1" onclick="ver('Combo 1kg + 1/4kg', '$15.000', 'c1')">
+            <h3>1 KG + 1/4 KG</h3>
+            <span class="precio">$15.000</span>
         </div>
 
+        <div class="card" id="c2" onclick="ver('Combo 1/2kg + 1/4kg', '$10.000', 'c2')">
+            <h3>1/2 KG + 1/4 KG</h3>
+            <span class="precio">$10.000</span>
+        </div>
+        
+        <div class="card" id="c3" onclick="ver('1Kg+1/2KG', '$20.000', 'c3')">
+            <h3>1KG+1/2KG</h3>
+            <span class="precio">$20.000</span>
+        </div>
+
+        <div class="card" id="c4" onclick="ver('Súper 2 Kilos', '$24.000', 'c4')">
+            <span style="background:var(--primario); color:white; padding:2px 8px; border-radius:10px; font-size:0.7rem; position:absolute; top:-10px; left:50%; transform:translateX(-50%); font-weight:bold;">TOP</span>
+            <h3>DOS KILOS</h3>
+            <span class="precio">$24.000</span>
+        </div>
     </div>
 
-    
-</body>
+    <div id="seccion-sabores">
+        <h2 id="nom-p" style="text-align: center; color: var(--secundario); margin-top:0;"></h2>
+        
+        <span class="categoria-titulo">Nuestras Cremas 🍦</span>
+        <div id="lista-crema" class="lista-sabores">Cargando...</div>
 
-</html><script>
-    const urlPlanilla = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhxf_pDd_vZrsa7jDx-TtptUbTyuM6WyxnEPz9Kr9RLZht4k6Bym5Zcq6I-jGv6_3kHAm0-GQAB3jh/pub?output=csv';
+        <span class="categoria-titulo">Frutales al Agua 🍋</span>
+        <div id="lista-agua" class="lista-sabores">Cargando...</div>
 
-    async function cargarSabores() {
-        try {
-            // Agregamos un número aleatorio al final para evitar que Google use datos viejos
-            const respuesta = await fetch(urlPlanilla + '&version=' + Math.random());
-            const texto = await respuesta.text();
-            
-            const filas = texto.split(/\r?\n/);
-            const contCrema = document.getElementById('lista-crema');
-            const contAgua = document.getElementById('lista-agua');
-            
-            // Verificamos que los contenedores existan antes de limpiar
-            if (contCrema) contCrema.innerHTML = "";
-            if (contAgua) contAgua.innerHTML = "";
+        <button class="btn-ws" onclick="enviar()">Pedir por WhatsApp </button>
+    </div>
 
-            for (let i = 1; i < filas.length; i++) {
-                if (!filas[i].trim()) continue;
+    <script>
+        const urlPlanilla = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhxf_pDd_vZrsa7jDx-TtptUbTyuM6WyxnEPz9Kr9RLZht4k6Bym5Zcq6I-jGv6_3kHAm0-GQAB3jh/pub?output=csv';
+        let elegida = "";
+        let precioElegido = "";
 
-                // Limpiamos comillas y espacios de cada columna
-                let columnas = filas[i].split(',').map(c => c.replace(/"/g, "").trim());
+        async function cargarSaboresDesdeExcel() {
+            try {
+                const res = await fetch(urlPlanilla + '&t=' + new Date().getTime());
+                const texto = await res.text();
+                const filas = texto.split(/\r?\n/).slice(1);
                 
-                if (columnas.length >= 3) {
-                    let nombre = columnas[0];
-                    let categoria = columnas[1]; 
-                    let disponible = columnas[2].toLowerCase();
+                const contCrema = document.getElementById('lista-crema');
+                const contAgua = document.getElementById('lista-agua');
+                contCrema.innerHTML = ""; contAgua.innerHTML = "";
 
-                    if (disponible === "si") {
-                        const htmlSabor = `<label class="opcion"><input type="checkbox" name="sabor" value="${nombre}" onchange="actualizarInfo()"> <span>${nombre}</span></label>`;
-                        
-                        // Comparación exacta con lo que tenés en el Excel
-                        if (categoria === "saboresCrema" && contCrema) {
-                            contCrema.innerHTML += htmlSabor;
-                        } else if (categoria === "saboresAgua" && contAgua) {
-                            contAgua.innerHTML += htmlSabor;
-                        }
+                filas.forEach(f => {
+                    const col = f.split(',').map(c => c.replace(/"/g, "").trim());
+                    if (col.length >= 3 && col[2].toLowerCase() === "si") {
+                        const html = `<label><input type="checkbox" value="${col[0]}"> ${col[0]}</label>`;
+                        if (col[1] === "saboresCrema") contCrema.innerHTML += html;
+                        if (col[1] === "saboresAgua") contAgua.innerHTML += html;
                     }
-                }
-            }
-
-            // Si no hay sabores, mostramos un mensaje de ayuda
-            if (contCrema && contCrema.innerHTML === "") contCrema.innerHTML = "<p>No hay sabores de crema activos.</p>";
-            if (contAgua && contAgua.innerHTML === "") contAgua.innerHTML = "<p>No hay sabores al agua activos.</p>";
-
-        } catch (error) {
-            console.error("Error:", error);
-            if(document.getElementById('lista-crema')) {
-                document.getElementById('lista-crema').innerHTML = "Error al conectar. Probá recargando la página.";
+                });
+            } catch (e) {
+                console.error("Error al cargar sabores");
             }
         }
-    }
 
-    function actualizarInfo() {
-        const tamano = document.querySelector('input[name="tamano"]:checked');
-        const seleccionados = document.querySelectorAll('input[name="sabor"]:checked');
-        const resumen = document.getElementById('resumen-seleccion');
-        
-        if (!tamano) {
-            resumen.innerText = "Primero elegí un tamaño";
-            return;
-        }
-        
-        const n = seleccionados.length;
-        resumen.innerText = n === 0 ? "Seleccioná tus sabores" : `Llevás ${n} ${n === 1 ? 'sabor' : 'sabores'} seleccionados`;
-    }
+        function ver(nombre, precio, id) {
+            const panel = document.getElementById('seccion-sabores');
+            const titulo = document.getElementById('nom-p');
+            const cards = document.querySelectorAll('.card');
+            const limpiarChecks = () => { document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false); };
 
-    function copiarAlias() {
-        const alias = "helados.mix";
-        navigator.clipboard.writeText(alias).then(() => {
-            const msj = document.getElementById("mensajeCopiado");
-            msj.style.visibility = "visible";
-            setTimeout(() => msj.style.visibility = "hidden", 2000);
-        });
-    }
-
-    function enviarWhatsApp() {
-        const tamano = document.querySelector('input[name="tamano"]:checked');
-        const seleccionados = document.querySelectorAll('input[name="sabor"]:checked');
-        const direccion = document.getElementById('direccion').value.trim() || "Retiro en local";
-
-        if (!tamano) {
-            alert("Por favor, elegí un tamaño.");
-            return;
-        }
-        if (seleccionados.length === 0) {
-            alert("Por favor, seleccioná al menos un sabor.");
-            return;
+            if (elegida === nombre && panel.style.display === "block") {
+                panel.style.display = "none"; elegida = ""; precioElegido = "";
+                document.getElementById(id).classList.remove('activa'); limpiarChecks();
+            } else {
+                limpiarChecks(); cards.forEach(c => c.classList.remove('activa'));
+                document.getElementById(id).classList.add('activa');
+                elegida = nombre; precioElegido = precio;
+                titulo.innerText = "Armando: " + nombre + " (" + precio + ")";
+                panel.style.display = "block"; panel.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
-        let lista = "";
-        seleccionados.forEach(s => lista += "✅ " + s.value + "%0A");
+        function enviar() {
+            const checks = document.querySelectorAll('input:checked');
+            let gustos = []; checks.forEach(c => gustos.push(c.value));
+            if (gustos.length === 0) return alert("Por favor, seleccioná al menos un sabor.");
+            const miNum = "5491137610574"; 
+            const msj = `¡Hola Helados.mix! 🍦\nQuiero la promo: *${elegida}*\nPrecio: *${precioElegido}*\n\nSabores elegidos:\n✅ ${gustos.join("\n✅ ")}`;
+            window.open(`https://wa.me/${miNum}?text=${encodeURIComponent(msj)}`, '_blank');
+        }
 
-        const msj = `¡Hola *Helados.mix*! 👋%0A%0A*Pedido:* ${tamano.value}%0A*Dirección:* ${direccion}%0A%0A*Sabores:*%0A${lista}`;
-        window.open(`https://wa.me/5491137610574?text=${msj}`, '_blank');
-    }
+        window.onload = cargarSaboresDesdeExcel;
+    </script>
 
-    // Iniciamos la carga
-    window.onload = cargarSabores;
-</script>
+    <div style="text-align: center; width: 100%;">
+        <a href="index.html" class="btn-volver-celeste">
+            ⬅️ Volver a los Sabores
+        </a>
+    </div>
+</body>
+</html>
